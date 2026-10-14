@@ -1,0 +1,69 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+<meta name="theme-color" content="#f7f5ef">
+<title>Chapter & Co. | Your Reading Journal</title>
+<link rel="stylesheet" href="style.css">
+</head>
+<body>
+<div class="app-shell">
+<aside class="sidebar" id="sidebar">
+  <a class="brand" href="#dashboard"><span class="brand-mark">c.</span><span>chapter<span class="amp">&</span>co.</span></a>
+  <p class="side-label">YOUR SPACE</p>
+  <nav class="nav">
+    <a class="nav-link active" href="#dashboard" data-view="dashboard"><span class="nav-icon">⌂</span> Overview</a>
+    <a class="nav-link" href="#library" data-view="library"><span class="nav-icon">▤</span> My library <span class="nav-count" id="navCount">0</span></a>
+    <a class="nav-link" href="#add" data-view="add"><span class="nav-icon">＋</span> Add a book</a>
+    <a class="nav-link" href="#stats" data-view="stats"><span class="nav-icon">◔</span> Reading stats</a>
+  </nav>
+  <div class="sidebar-bottom">
+    <div class="quote-card"><span class="quote-mark">“</span><p>A room without books is like a body without a soul.</p><small>— Cicero</small></div>
+    <div class="profile"><div class="avatar">R</div><div><strong>Reader's nook</strong><small>Your personal library</small></div></div>
+  </div>
+</aside>
+<main class="main">
+<header class="topbar"><button class="mobile-menu" id="menuBtn" aria-label="Open menu">☰</button><div class="breadcrumb">My reading space <span>/</span> <strong id="pageCrumb">Overview</strong></div><div class="topbar-right"><i></i> A little time for a good book</div></header>
+
+<section class="view active" id="view-dashboard">
+  <div class="welcome-row"><div><p class="eyebrow">YOUR PERSONAL READING JOURNAL</p><h1>Make room for <em>stories.</em></h1><p class="subheading">Keep the books you love, the ones you're reading, and the stories still waiting for you.</p><a href="#add" class="button primary hero-button">＋ Add a book <span>→</span></a></div><div class="hero-art" aria-hidden="true"><div class="hero-sun"></div><div class="hero-spark">✳</div><div class="hero-book hb1"></div><div class="hero-book hb2"></div><div class="hero-book hb3"></div><div class="hero-leaf">✦</div></div></div>
+  <div class="stat-grid">
+    <article class="stat-card"><div class="stat-top"><span class="stat-icon lilac">▤</span><span class="stat-caption">ALL BOOKS</span></div><div class="stat-number" id="totalBooks">0</div><div class="stat-foot">Your collection so far</div></article>
+    <article class="stat-card"><div class="stat-top"><span class="stat-icon peach">◷</span><span class="stat-caption">TO READ</span></div><div class="stat-number" id="toReadBooks">0</div><div class="stat-foot">Stories on your list</div></article>
+    <article class="stat-card"><div class="stat-top"><span class="stat-icon mint">◉</span><span class="stat-caption">READING NOW</span></div><div class="stat-number" id="readingBooks">0</div><div class="stat-foot">Currently in progress</div></article>
+    <article class="stat-card"><div class="stat-top"><span class="stat-icon butter">✧</span><span class="stat-caption">FINISHED</span></div><div class="stat-number" id="finishedBooks">0</div><div class="stat-foot">Stories you've completed</div></article>
+  </div>
+  <div class="section-heading"><div><p class="eyebrow">PICK UP WHERE YOU LEFT OFF</p><h2>Your reading shelf</h2></div><a href="#library" class="text-link">View all books <span>→</span></a></div>
+  <div class="shelf-panel"><div class="shelf-head"><div><span class="tiny-dot"></span> Recently added</div><span class="muted" id="shelfCount">0 books</span></div><div class="book-grid" id="recentBooks"></div><div class="empty-state" id="recentEmpty"><div class="empty-illustration">▤</div><h3>Your shelf is waiting</h3><p>Add your first book and start building a little reading sanctuary.</p><a href="#add" class="button primary">＋ Add your first book</a></div></div>
+  <div class="bottom-note"><span>✦</span><span><strong>Small reminder:</strong> reading one page is still reading. Take it at your own pace.</span></div>
+</section>
+
+<section class="view" id="view-library">
+  <div class="page-title-row"><div><p class="eyebrow">EVERY STORY IN ONE PLACE</p><h1>My <em>library.</em></h1><p class="subheading">A home for every book on your journey.</p></div><a href="#add" class="button primary">＋ Add a book</a></div>
+  <div class="library-toolbar"><label class="search-box"><span>⌕</span><input id="searchInput" type="search" placeholder="Search title or author..." aria-label="Search books"></label><select id="statusFilter" aria-label="Filter by status"><option value="All">All statuses</option><option>To read</option><option>Reading</option><option>Finished</option></select><select id="sortFilter" aria-label="Sort books"><option value="newest">Newest first</option><option value="oldest">Oldest first</option><option value="title">Title A–Z</option></select></div>
+  <div class="library-summary"><span id="libraryResultCount">0 books</span><span class="muted">Your collection, your pace.</span></div>
+  <div class="book-grid library-grid" id="libraryBooks"></div><div class="empty-state" id="libraryEmpty"><div class="empty-illustration">⌕</div><h3>No books found</h3><p>Try another search, or add a new book to your collection.</p><a href="#add" class="button primary">＋ Add a book</a></div>
+</section>
+
+<section class="view" id="view-add">
+  <div class="page-title-row"><div><p class="eyebrow">A NEW CHAPTER BEGINS</p><h1>Add to your <em>shelf.</em></h1><p class="subheading">Every great reading list starts with one book.</p></div></div>
+  <div class="form-layout"><div class="form-card"><form id="bookForm" novalidate>
+    <div class="form-heading"><span class="form-icon">✧</span><div><h2>Book details</h2><p>Tell us a little about your next read.</p></div></div>
+    <div class="field"><label for="bookTitle">Book title <span>*</span></label><input id="bookTitle" maxlength="180" placeholder="e.g. The God of Small Things" required><small>The name printed on the cover.</small></div>
+    <div class="field"><label for="bookAuthor">Author <span>*</span></label><input id="bookAuthor" maxlength="120" placeholder="e.g. Arundhati Roy" required><small>Who brought this story to life?</small></div>
+    <div class="field"><label for="bookStatus">Reading status</label><select id="bookStatus"><option>To read</option><option>Reading</option><option>Finished</option></select></div>
+    <div class="form-error" id="formError" role="alert"></div><div class="form-actions"><button type="submit" class="button primary">Add to my library <span>→</span></button><button type="reset" class="button ghost">Clear form</button></div>
+  </form></div>
+  <aside class="form-aside"><div class="aside-art"><span>✦</span><div class="stack-book one"></div><div class="stack-book two"></div><div class="stack-book three"></div><b>✿</b></div><p class="eyebrow">A NOTE TO YOURSELF</p><h3>There is no race to the last page.</h3><p>Some books are read in a day. Others stay beside us for months. Both belong here.</p></aside></div>
+</section>
+
+<section class="view" id="view-stats">
+  <div class="page-title-row"><div><p class="eyebrow">YOUR READING, AT A GLANCE</p><h1>Little reading <em>habits.</em></h1><p class="subheading">Celebrate every story, even the ones still in progress.</p></div></div>
+  <div class="stats-large-grid"><article class="stats-feature"><div class="feature-label">YOUR COLLECTION</div><div class="feature-number" id="statsTotal">0</div><p>books in your personal library</p><div class="feature-decoration">▤</div></article><article class="progress-card"><h2>Reading breakdown</h2><p>Where your books are right now.</p><div class="progress-line"><div class="progress-label"><span><i class="dot peach-dot"></i>To read</span><strong id="statsToRead">0</strong></div><div class="progress-track"><div class="progress-fill peach-fill" id="barToRead"></div></div></div><div class="progress-line"><div class="progress-label"><span><i class="dot mint-dot"></i>Reading</span><strong id="statsReading">0</strong></div><div class="progress-track"><div class="progress-fill mint-fill" id="barReading"></div></div></div><div class="progress-line"><div class="progress-label"><span><i class="dot lilac-dot"></i>Finished</span><strong id="statsFinished">0</strong></div><div class="progress-track"><div class="progress-fill lilac-fill" id="barFinished"></div></div></div></article></div>
+  <div class="section-heading"><div><p class="eyebrow">A GENTLE NUDGE</p><h2>Keep turning pages</h2></div></div><div class="encouragement-card"><div class="encouragement-icon">✦</div><div><h3 id="encouragementTitle">Your next favourite story is out there.</h3><p id="encouragementText">Add a book to your shelf and let your reading journey grow, one chapter at a time.</p></div><a href="#library" class="text-link">Explore library →</a></div>
+</section>
+<footer class="footer"><span>chapter<span class="amp">&</span>co.</span><span>Made for the love of reading <b>♥</b></span></footer>
+</main></div>
+<div class="toast" id="toast" role="status" aria-live="polite"></div>
+<script src="app.js"></script>
+</body></html>
